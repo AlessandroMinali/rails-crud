@@ -10,4 +10,14 @@ class Planet < ApplicationRecord
     self.terrains = [Terrain.default] if self.terrains.empty?
     self
   end
+
+  def assign_climates_and_terrains(c, t)
+    self.climates = c.map do |climate|
+      Climate.new(description: climate)
+    end unless c.blank?
+    self.terrains = t.map do |terrain|
+      Terrain.new(description: terrain)
+    end unless t.blank?
+    self
+  end
 end

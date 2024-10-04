@@ -10,14 +10,7 @@ class PlanetsController < ApplicationController
   # POST /planets
   def create
     @planet = Planet.new(planet_params.permit(:name, :population))
-
-    @planet.climates = climates_params.map do |c|
-      Climate.new(description: c)
-    end if !climates_params.blank?
-    @planet.terrains = terrains_params.map do |c|
-      Terrain.new(description: c)
-    end if !terrains_params.blank?
-
+    @planet.assign_climates_and_terrains(climates_params, terrains_params)
     @planet.set_defaults
 
     if @planet.save
@@ -31,13 +24,7 @@ class PlanetsController < ApplicationController
   def update
     @planet = Planet.find_by(name: params[:id])
     @planet.assign_attributes(planet_params.permit(:name, :population))
-
-    @planet.climates = climates_params.map do |c|
-      Climate.new(description: c)
-    end if !climates_params.blank?
-    @planet.terrains = terrains_params.map do |c|
-      Terrain.new(description: c)
-    end if !terrains_params.blank?
+    @planet.assign_climates_and_terrains(climates_params, terrains_params)
 
     if @planet.save
       render json: @planet
