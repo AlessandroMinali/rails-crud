@@ -10,7 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_10_04_144612) do
+ActiveRecord::Schema[7.2].define(version: 2024_10_04_144810) do
+  create_table "climates", force: :cascade do |t|
+    t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["description"], name: "index_climates_on_description", unique: true
+  end
+
+  create_table "climates_planets", id: false, force: :cascade do |t|
+    t.integer "planet_id", null: false
+    t.integer "climate_id", null: false
+  end
+
   create_table "planets", force: :cascade do |t|
     t.text "name", null: false
     t.integer "population", default: 0, null: false
@@ -18,4 +30,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_04_144612) do
     t.datetime "updated_at", null: false
     t.index ["name"], name: "index_planets_on_name", unique: true
   end
+
+  add_foreign_key "climates_planets", "climates"
+  add_foreign_key "climates_planets", "planets"
 end
