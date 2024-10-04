@@ -12,11 +12,11 @@ class Planet < ApplicationRecord
   end
 
   def assign_climates_and_terrains(c, t)
-    self.climates = c.map do |climate|
-      Climate.new(description: climate)
+    c.map do |climate|
+      self.climates.new(description: climate)
     end unless c.blank?
-    self.terrains = t.map do |terrain|
-      Terrain.new(description: terrain)
+    t.map do |terrain|
+      self.terrains.new(description: terrain)
     end unless t.blank?
     self
   end
