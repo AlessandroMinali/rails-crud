@@ -6,8 +6,8 @@ class Planet < ApplicationRecord
   validates :terrains, presence: true
 
   def set_defaults
-    self.climates = [Climate.default] if self.climates.blank?
-    self.terrains = [Terrain.default] if self.terrains.blank?
+    self.climates = [ Climate.default ] if self.climates.blank?
+    self.terrains = [ Terrain.default ] if self.terrains.blank?
   end
 
   def build_climate_and_terrain(climates, terrains)

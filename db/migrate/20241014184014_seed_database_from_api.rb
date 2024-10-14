@@ -7,7 +7,7 @@ class SeedDatabaseFromApi < ActiveRecord::Migration[7.2]
     http.verify_mode = OpenSSL::SSL::VERIFY_NONE
     request = Net::HTTP::Post.new("/.netlify/functions/index")
     request.content_type = 'application/json'
-    request.body = {query: '{allPlanets{planets{name population terrains climates}}}'}.to_json
+    request.body = { query: '{allPlanets{planets{name population terrains climates}}}' }.to_json
     JSON.parse(http.request(request).body).dig('data', 'allPlanets', 'planets').each do |planet|
       record = Planet.new(name: planet['name'], population: planet['population'].to_i)
       record.terrains = planet['terrains'].map do |terrain|
