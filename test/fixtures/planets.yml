@@ -1,0 +1,10 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyText
+  population: 1
+
+
+two:
+  name: MyText2
+  population: 1
