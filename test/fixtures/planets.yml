@@ -3,8 +3,12 @@
 one:
   name: MyText
   population: 1
+  climates: [one]
+  terrains: [one]
 
 
 two:
   name: MyText2
   population: 1
+  climates: [two]
+  terrains: [two]
